@@ -11,6 +11,15 @@ module RottenTomatoes
     @@api_key = ""
     @@api_response = {}
 
+    TYPE_TO_SECTION = {
+      :box_office => 'movies',
+      :in_theaters => 'movies',
+      :opening => 'movies',
+      :top_rentals => 'dvds',
+      :current_releases => 'dvds',
+      :new_releases => 'dvds'
+    }
+
     def self.api_key
       @@api_key
     end
@@ -34,8 +43,9 @@ module RottenTomatoes
       end
 
       if (method == "lists")
-        url += (options[:type] == "new_releases") ? "/dvds/" : "/movies/"
-        url += options[:type]
+        type = options[:type]
+        section = options[:section] || TYPE_TO_SECTION[type] || 'movies'
+        url += "/#{section}/#{type}"
       end
       
       url += ".json" if (url[-5, 5] != ".json")

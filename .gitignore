@@ -6,3 +6,5 @@ test.rb
 /.idea
 *.iml
 /spec/setup/rottentomatoes_api_key.txt
+.buildpath
+.project
