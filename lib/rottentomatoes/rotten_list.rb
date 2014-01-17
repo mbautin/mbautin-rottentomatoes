@@ -11,7 +11,7 @@ module RottenTomatoes
       end
 
       section = options[:section]
-      unless section.nil? or ! ['movies', 'dvds'].include?(section)
+      unless section.nil? || ['movies', 'dvds'].include?(section)
         raise ArgumentError,
           ":section must be either 'movies' (default) or 'dvds', found #{section.inspect}"
       end
