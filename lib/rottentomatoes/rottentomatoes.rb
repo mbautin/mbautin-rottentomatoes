@@ -31,7 +31,7 @@ module RottenTomatoes
     def self.base_api_url
       "http://api.rottentomatoes.com/api/public/v1.0/"
     end
-    
+
     def self.api_call(method, options)
       raise ArgumentError, "Rotten.api_key must be set before you can use the API" if(@@api_key.nil? || @@api_key.empty?)
       raise ArgumentError, "You must specify 'movies', 'movie_alias', 'lists' or 'direct' as the method" if (method != "movies" && method != "direct" && method != "lists" && method != "movie_alias")
@@ -39,7 +39,7 @@ module RottenTomatoes
       url = (method == "direct") ? options : base_api_url + method
 
       if (method == "movies" && !options[:id].nil?)
-        url += "/" + options[:id].to_s 
+        url += "/" + options[:id].to_s
       end
 
       if (method == "lists")
@@ -47,9 +47,9 @@ module RottenTomatoes
         section = options[:section] || TYPE_TO_SECTION[type] || 'movies'
         url += "/#{section}/#{type}"
       end
-      
+
       url += ".json" if (url[-5, 5] != ".json")
-      url += "?apikey=" + @@api_key 
+      url += "?apikey=" + @@api_key
       url += "&q=" + CGI::escape(options[:title].to_s) if (method == "movies" && !options[:title].nil? && options[:id].nil?)
       url += "&type=imdb&id=%07d" % options[:imdb].to_i if (method == "movie_alias")
 
@@ -64,7 +64,7 @@ module RottenTomatoes
         return body
       end
     end
-    
+
     def self.process_results(results, options)
       results.flatten!
       results.compact!
@@ -80,7 +80,7 @@ module RottenTomatoes
         return results[0]
       else
         return results
-      end		
+      end
     end
 
     def self.get_url(uri_str, limit = 10)
@@ -93,7 +93,7 @@ module RottenTomatoes
       rescue SocketError, Errno::ENETDOWN
         response = Net::HTTPBadRequest.new( '404', 404, "Not Found" )
         return response
-      end 
+      end
       case response
         when Net::HTTPSuccess     then response
         when Net::HTTPRedirection then get_url(response['location'], limit - 1)

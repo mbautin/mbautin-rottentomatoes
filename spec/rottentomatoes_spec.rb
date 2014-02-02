@@ -5,7 +5,7 @@ describe Rotten do
   it "set a specified API key" do
     old_key = Rotten.api_key
     key = "000000000"
-    Rotten.api_key = key 
+    Rotten.api_key = key
     Rotten.api_key.should == key
     Rotten.api_key = old_key
   end
@@ -26,9 +26,9 @@ describe Rotten do
 
   it "should raise an exception if the API key is not set" do
     old_key = Rotten.api_key
-    lambda { 
+    lambda {
       Rotten.api_key = ""
-      Rotten.api_call("movies", :title => "Fight Club") 
+      Rotten.api_call("movies", :title => "Fight Club")
     }.should raise_error(ArgumentError)
     Rotten.api_key = old_key
   end

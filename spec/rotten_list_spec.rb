@@ -7,7 +7,7 @@ describe RottenList do
     movies.should be_a_kind_of Array
     movies.each do |movie|
       movie.should be_a_kind_of OpenStruct
-    end    
+    end
   end
 
   it "should look up a movie list with section specified and return an array" do
@@ -24,7 +24,7 @@ describe RottenList do
       end
     end
   end
-  
+
   it "should raise an error when a lookup type that is not recognized is used" do
     lambda {
       movies = RottenList.find(:type => "unknown", :limit => 3)

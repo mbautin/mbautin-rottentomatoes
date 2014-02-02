@@ -1,7 +1,7 @@
 module RottenTomatoes
 
   class RottenMovie
-    
+
     def self.find(options)
       raise ArgumentError, "You must search by title, id or imdb id" if (options[:title].nil? && options[:id].nil? && options[:imdb].nil?)
 
