@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 2.14.1"
   s.add_development_dependency "webmock", ">= 1.6.2"
 
+  s.add_dependency "addressable", ">= 2.3.5", "< 3.0"
   s.add_dependency "deepopenstruct", ">= 0.1.2"
   s.add_dependency "json"
 
