@@ -84,34 +84,22 @@ module RottenTomatoes
     end
 
     def self.get_url(uri_str, limit = 10)
-      puts "get_url: uri_str=#{uri_str}, limit=#{limit}"
       return false if limit == 0
       uri = URI.parse(uri_str)
-      puts "uri=#{uri}"
-
       begin
         response = Net::HTTP.start(uri.host, uri.port) do |http|
           http.get((uri.path.empty? ? '/' : uri.path) + (uri.query ? '?' + uri.query : ''))
         end
-        puts "response=#{response}"
       rescue SocketError, Errno::ENETDOWN
         response = Net::HTTPBadRequest.new( '404', 404, "Not Found" )
-        puts "ENETDOWN: response=#{response}"
         return response
       end
       case response
-        when Net::HTTPSuccess     then
-          puts "HTTPSuccess: response=#{response}"
-          response
-        when Net::HTTPRedirection then
-          puts "redirected to #{response['location']}"
-          get_url(response['location'], limit - 1)
-        when Net::HTTPForbidden   then
-          puts "HTTPForbidden, retrying #{limit - 1} times"
-          get_url(uri_str, limit - 1)
-        else
-          puts "Not found, returning HTTPBadRequest"
-          Net::HTTPBadRequest.new( '404', 404, "Not Found" )
+        when Net::HTTPSuccess     then response
+        when Net::HTTPRedirection then get_url(response['location'], limit - 1)
+        when Net::HTTPForbidden   then get_url(uri_str, limit - 1)
+      else
+        Net::HTTPBadRequest.new( '404', 404, "Not Found" )
       end
     end
 
