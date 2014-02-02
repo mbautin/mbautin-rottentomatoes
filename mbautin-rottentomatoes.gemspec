@@ -2,17 +2,21 @@
 require File.expand_path("../lib/rottentomatoes/version", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name        = "rottentomatoes"
+  s.name        = "mbautin-rottentomatoes"
   s.version     = RottenTomatoes::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nicholas Munson"]
-  s.email       = ["nmunson@gmail.com"]
-  s.homepage    = "http://rubygems.org/gems/rottentomatoes"
+
+  # Disable email
+  s.email = []
+  # s.email       = ["nmunson@gmail.com"]
+
+  s.homepage    = "http://rubygems.org/gems/mbautin-rottentomatoes"
   s.summary     = "An ActiveRecord-style API wrapper for RottenTomatoes.com"
   s.description = "An ActiveRecord-style API wrapper for RottenTomatoes.com"
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "rottentomatoes"
+  s.rubyforge_project         = "mbautin-rottentomatoes"
 
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rspec", "~> 2.14.1"
