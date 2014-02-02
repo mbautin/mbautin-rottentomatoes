@@ -11,6 +11,8 @@ module RottenTomatoes
     @@api_key = ""
     @@api_response = {}
 
+    REQUEST_SLEEP_SEC = ENV['ROTTENTOMATOES_REQUEST_SLEEP_SEC'].to_f || 0
+
     TYPE_TO_SECTION = {
       :box_office => 'movies',
       :in_theaters => 'movies',
@@ -90,6 +92,7 @@ module RottenTomatoes
         response = Net::HTTP.start(uri.host, uri.port) do |http|
           http.get((uri.path.empty? ? '/' : uri.path) + (uri.query ? '?' + uri.query : ''))
         end
+        sleep(REQUEST_SLEEP_SEC) if REQUEST_SLEEP_SEC != 0
       rescue SocketError, Errno::ENETDOWN
         response = Net::HTTPBadRequest.new( '404', 404, "Not Found" )
         return response
