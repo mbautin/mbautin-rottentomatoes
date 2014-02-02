@@ -19,7 +19,6 @@ describe RottenList do
         results = RottenList.find(:section => section, :type => type, :limit => 3)
         expect(results.length).to eq(3)
         results.each do |movie|
-          puts movie
           expect(movie).to be_a_kind_of(OpenStruct)
         end
       end

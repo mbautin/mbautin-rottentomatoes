@@ -53,7 +53,12 @@ Each object provides a find() method which accepts a number of options:
 
   RottenList.find(:type => "upcoming", :limit => 10, :expand_results => true)
 
-[:type]            specifies a list type to retrieve.  Valid options are 'box_office', 'in_theaters', 'opening', 'upcoming', 'new_releases'.
+[:type]            specifies a list type to retrieve.  Valid options are
+                   'box_office', 'in_theaters', 'opening' (only valid with the 'movies' section),
+                   'upcoming' (valid with both 'movies' and 'dvds' sections),
+                   and 'new_releases', 'top_rentals', 'current_releases' (only valid with the 'dvds'
+                   section).
+[:section]         'movies' (default) or 'dvds'.
 [:limit]           see RottenMovie
 [:expand_results]  see RottenMovie
 
@@ -99,5 +104,6 @@ To find out more about the information each object offers on retrieved items hav
 
 Author:: {Nicholas Munson}[mailto:nmunson@gmail.com]
 Credits:: {Aaron Gough}[http://thingsaaronmade.com]
+Improvements:: {Mikhail Bautin}
 
 Copyright (c) 2011 {Nicholas Munson}[http://nmunson.com/] ({nmunson.com}[http://nmunson.com/]), released under the MIT license

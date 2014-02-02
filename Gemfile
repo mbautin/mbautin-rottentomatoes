@@ -1,4 +1,4 @@
 source :gemcutter
 
-# Specify your gem's dependencies in rottentomatoes.gemspec
+# Specify your gem's dependencies in mbautin-rottentomatoes.gemspec
 gemspec
